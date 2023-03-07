@@ -2,7 +2,6 @@
   "name": "altura",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.opensea.io/v2/orders/ethereum/seaport/listings?maker=0x85caa53c024f04fdfaebec72017889de32bf9a09&order_by=created_date&order_direction=desc",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -10,6 +9,7 @@
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "ethers": "^6.0.8",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
