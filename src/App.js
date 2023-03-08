@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ethers} from 'ethers';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 // Define App component
@@ -13,7 +13,6 @@ function App() {
   const[address, setAddress] = useState(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [urls, setURL] = useState([]);
 
   // Handle login button click
@@ -45,7 +44,7 @@ function App() {
       // Get container element to display NFTs
       const nftContainer = document.getElementById('nftItems');
       const url = 'https://api.unsplash.com/photos/random?client_id=C2AtOgSxPXZ_8gZi1Fdtl00bAMwx_AYVI5ZGXP4W60o&count=3'
-     
+      //fetch assets and display them
       fetch(url).then((response) => response.json())
                   .then((data) => 
                     {
@@ -57,7 +56,7 @@ function App() {
                       const {urls, alt_description} = nft;
                       const newElement = document.createElement('div');
                       setURL(urls.regular);
-                      console.log(urls)
+                      console.log(urls.regular)
                       
                       newElement.innerHTML = `
                         <div class='nft-card' style=" border-radius: 7px; width: 250px; margin-top: 20px;">
@@ -67,20 +66,35 @@ function App() {
                         </div>
                         </div>
                       `
-                      console.log(show);
+                      //render modal when asset is clicked
                       nftContainer.appendChild(newElement);
                       let nft_card = document.querySelectorAll('.nft-card');
                       [...nft_card].forEach((item) => {
                         item.addEventListener("click", (e) =>{
                           setShow(true);
                         })
-                      })
+                      });
+
+                      const modal_body = document.querySelector('modal_body');
+
+                      for(let i = 0; i < urls.length; i++) {
+                        let image = document.createElement('img');
+                        image.setAttribute("src", urls[i]);
+                        modal_body.appendChild(image);
+                      }
                     })
                     })
 
     }
   }
-      
+      //redirects to asset page
+      const purchaseNFT = () => {
+        document.getElementById('purchase-btn').addEventListener("click", (e) =>{
+        for(let i = 0; i < urls.length; i++) {
+          window.location.href = i;
+        }
+        })
+      }
   // Render app UI
   return (
       <>
@@ -113,7 +127,7 @@ function App() {
 
         {/* Display NFTs */}
             
-            <div id="nftItems" className="d-flex justify-content-sm-around" >
+            <div id="nftItems" className="d-flex flex-lg-wrap justify-content-lg-around" >
         
             </div>
             
@@ -121,12 +135,12 @@ function App() {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-        <img src={urls[0]} />
+        <Modal.Body id="modal_body">
+        
         </Modal.Body>
         <Modal.Footer>
           
-          <Button variant="dark" onClick={handleClose}>
+          <Button variant="dark" onClick={purchaseNFT} id="purchase-btn">
             Purchase NFT
           </Button>
         </Modal.Footer>
