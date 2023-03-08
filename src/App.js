@@ -4,11 +4,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ethers} from 'ethers';
 import { useState, useEffect } from 'react'
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 // Define App component
 function App() {
   // Set initial state for wallet address to null
   const[address, setAddress] = useState(null);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [urls, setURL] = useState([]);
 
   // Handle login button click
   const handleLogin = async (event) => {
@@ -38,48 +43,31 @@ function App() {
     } else {
       // Get container element to display NFTs
       const nftContainer = document.getElementById('nftItems');
-      // Set options for fetch request
-      const options = {
-        method: 'GET', 
-        headers: {
-          'Content-Type' : 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }
-      };
+      const url = 'https://api.unsplash.com/photos/random?client_id=C2AtOgSxPXZ_8gZi1Fdtl00bAMwx_AYVI5ZGXP4W60o&count=3'
+     
+      fetch(url).then((response) => response.json())
+                  .then((data) => 
+                    {
+                    if (data.length === 0)
+                    {
+                      console.log('Could not retreive NFTs')
+                    } 
+                    data.forEach((nft) => {
+                      const {urls, alt_description} = nft;
+                      const newElement = document.createElement('div');
+                      setURL(urls.regular);
+                      newElement.innerHTML = `
+                        <div className="card m-2"  >
+                        <img src='${urls.regular}' width='250px' height='250px' />
+                        <div className='card-body>
+                        <p>${alt_description}</p>
+                        </div>
+                        </div>
+                      `
+                      nftContainer.appendChild(newElement)
+                    })
+                    })
 
-      // Fetch NFTs from OpenSea API
-      let items = fetch(`https://api.opensea.io/v2/orders/ethereum/seaport/listings?maker=${address}&order_by=created_date&order_direction=desc`, options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
-
-      // If no NFTs are found, exit the function
-      if (items.length === null) { return }
-
-      // Loop through NFTs and create new HTML element for each one
-      items.forEach((nft) => {
-        const { name, image_url, description, permalink } = nft
-
-        const newElement = document.createElement('div')
-        newElement.innerHTML = `
-         
-         <a href='${permalink}' target="_blank">
-            <div class='d-flex flex-column'>
-              <img
-                src='${image_url}'
-                class='w-100 rounded-lg' />
-              <div class='flex-column w-100 my-1'>
-                <p class='text-gray-800 fs-5'>${name}</p>
-                <p class='text-gray-500 fs-6 text-wrap'>${description ?? ''}</p>
-              </div>
-            </div>
-          </a>
-         
-        `
-
-        // Append new NFT element to container
-        nftContainer.appendChild(newElement)
-      })
     }
   }
       
@@ -112,12 +100,27 @@ function App() {
           <div className="d-flex justify-content-center align-items-center">
             <button className="btn btn-dark mt-3 " onClick={getNFTs} >Get NFTs</button>
           </div>
+
         {/* Display NFTs */}
-          <div className="container-fluid d-flex justify-content-center">
-            <div id="nftItems" className="container-fluid col-lg-6 col-md-6 col-sm-6 col-xs-6 d-grid gap-2 grid-cols-4">
+            
+            <div onClick={handleShow} id="nftItems" className="d-flex justify-content-center mt-2 flex-row g-4 col w-100" >
         
             </div>
-          </div>
+            
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <img src={urls[0]} />
+        </Modal.Body>
+        <Modal.Footer>
+          
+          <Button variant="primary" onClick={handleClose}>
+            Purchase NFT
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </>  
   );
 }
