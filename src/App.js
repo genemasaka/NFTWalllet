@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 // Define App component
+
 function App() {
   // Set initial state for wallet address to null
   const[address, setAddress] = useState(null);
@@ -57,16 +58,23 @@ function App() {
                       const newElement = document.createElement('div');
                       setURL(urls.regular);
                       console.log(urls)
-
+                      
                       newElement.innerHTML = `
-                        <div style="border-style:solid; border-width: 1px; border-radius: 7px; width: 250px; margin-top: 20px;">
-                        <img src='${urls.small}' style="border-radius: 7px" height='250px' width='250px'/>
+                        <div class='nft-card' style=" border-radius: 7px; width: 250px; margin-top: 20px;">
+                        <img src='${urls.small}' class="img" style="border-radius: 7px" height='250px' width='250px'/>
                         <div style="padding-bottom: 15px; background-color: whitesmoke">
-                        <p>${alt_description}</p>
+                        <p style="padding:4px; text-align: center;">${alt_description}</p>
                         </div>
                         </div>
                       `
-                      nftContainer.appendChild(newElement)
+                      console.log(show);
+                      nftContainer.appendChild(newElement);
+                      let nft_card = document.querySelectorAll('.nft-card');
+                      [...nft_card].forEach((item) => {
+                        item.addEventListener("click", (e) =>{
+                          setShow(true);
+                        })
+                      })
                     })
                     })
 
@@ -105,7 +113,7 @@ function App() {
 
         {/* Display NFTs */}
             
-            <div onClick={handleShow} id="nftItems" className="d-flex justify-content-sm-around" >
+            <div id="nftItems" className="d-flex justify-content-sm-around" >
         
             </div>
             
