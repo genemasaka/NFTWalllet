@@ -56,10 +56,12 @@ function App() {
                       const {urls, alt_description} = nft;
                       const newElement = document.createElement('div');
                       setURL(urls.regular);
+                      console.log(urls)
+
                       newElement.innerHTML = `
-                        <div className="card m-2"  >
-                        <img src='${urls.regular}' width='250px' height='250px' />
-                        <div className='card-body>
+                        <div style="border-style:solid; border-width: 1px; border-radius: 7px; width: 250px; margin-top: 20px;">
+                        <img src='${urls.small}' style="border-radius: 7px" height='250px' width='250px'/>
+                        <div style="padding-bottom: 15px; background-color: whitesmoke">
                         <p>${alt_description}</p>
                         </div>
                         </div>
@@ -103,7 +105,7 @@ function App() {
 
         {/* Display NFTs */}
             
-            <div onClick={handleShow} id="nftItems" className="d-flex justify-content-center mt-2 flex-row g-4 col w-100" >
+            <div onClick={handleShow} id="nftItems" className="d-flex justify-content-sm-around" >
         
             </div>
             
@@ -116,7 +118,7 @@ function App() {
         </Modal.Body>
         <Modal.Footer>
           
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="dark" onClick={handleClose}>
             Purchase NFT
           </Button>
         </Modal.Footer>
