@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+## NFT Wallet React App
+This React application allows users to connect their Metamask wallet to view their NFT collectibles, and to display random NFTs from the OpenSea API. Users can also click on NFTs to view a modal that displays a larger version of the NFT and a "Purchase NFT" button that, when clicked, redirects the user to the asset's page.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dependencies
+react-bootstrap
+bootstrap
+ethers
+react
+react-dom
+react-scripts
+web-vitals
 
-## Available Scripts
+## How to run the application
+Clone the repository and navigate to the project directory in the terminal.
+Install dependencies by running npm install.
+Start the development server by running npm start.
+Open a web browser and navigate to http://localhost:3000/ to view the application.
 
-In the project directory, you can run:
+## How to use the application
+Click on the "Connect Wallet" button to connect your Metamask wallet.
+Click on the "Get NFTs" button to display random NFTs from the OpenSea API.
+Click on an NFT to view a modal that displays a larger version of the NFT and a "Purchase NFT" button.
+Click on the "Purchase NFT" button to be redirected to the asset's page.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##Notes
+You will need to obtain your own API key from Unsplash developer's portal to use this functionality.
+The application is currently set to display 3 random images from the Unsplash API, rather than actual NFTs from OpenSea, as the API at the moment of writing thus does not aloow Cross Origin Resource Sharing(CORS). This can be easily modified by replacing the API URL in the getNFTs function with a different API URL that returns actual NFTs.
