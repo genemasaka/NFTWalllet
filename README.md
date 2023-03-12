@@ -24,4 +24,4 @@ Click on the "Purchase NFT" button to be redirected to the asset's page.
 
 ## Notes
 You will need to obtain your own API key from Unsplash developer's portal to use this functionality.
-The application is currently set to display 3 random images from the Unsplash API, rather than actual NFTs from OpenSea, as the API at the moment of writing thus does not aloow Cross Origin Resource Sharing(CORS). This can be easily modified by replacing the API URL in the getNFTs function with a different API URL that returns actual NFTs.
+The application is currently set to display 3 random images from the Unsplash API, rather than actual NFTs from OpenSea, as the API at the moment of writing thus does not allow Cross Origin Resource Sharing(CORS). This can be easily modified by replacing the API URL in the getNFTs function with a different API URL that returns actual NFTs.
